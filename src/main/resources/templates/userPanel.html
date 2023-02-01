@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Daily Planner</title>
+</head>
+<style>
+    table, th, td {
+        border: 1px solid;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+</style>
+<body>
+<div style="padding: 20px;">
+    <input type="button" onclick="location.href='/ticket';" value="Home"/>
+    <input type="button" onclick="location.href='/ticket';" value="Create Ticket"/>
+</div>
+
+<h1>Your Tickets:</h1>
+<table>
+    <thead>
+    <th>Id</th>
+    <th>Description</th>
+    <th>Creation Date</th>
+    <th>Status</th>
+    </thead>
+    <tr th:each="ticket : ${tickets}">
+        <td th:text="${ticket.id}"></td>
+        <td th:text="${ticket.description}"></td>
+        <td th:text="${#dates.format(ticket.cratedAt, 'dd-MM-yyyy HH:mm')}"></td>
+        <td th:text="${ticket.status}"></td>
+    </tr>
+</table>
+
+<br/><br/>
+<div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
+</body>
+</html>
