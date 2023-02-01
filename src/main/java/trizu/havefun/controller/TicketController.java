@@ -1,7 +1,9 @@
 package trizu.havefun.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,8 +32,11 @@ public class TicketController {
     }
 
     @PostMapping()
-    public String createTicket(Ticket ticket){
-        System.out.println("in");
+    public String createTicket(@Valid Ticket ticket, Errors errors){
+        if(errors.hasErrors()){
+            return "ticket";
+        }
+
         ticketRepository.save(ticket);
         return "redirect:/userPanel";
     }

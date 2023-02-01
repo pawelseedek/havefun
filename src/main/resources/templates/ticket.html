@@ -6,10 +6,23 @@
 </head>
 
 <body>
+<div style="padding: 20px;">
+    <input type="button" onclick="location.href='/';" value="Home"/>
+    <input type="button" onclick="location.href='/userPanel';" value="UserPanel"/>
+    <input type="button" onclick="location.href='/logout';" value="Sign Out"/>
+</div>
+<br/>
 <h1 style="text-align: center">Create new ticket:</h1>
 <form method="POST">
+    <p>
+        <span style="color: red;"
+              th:if="${#fields.hasErrors('ticket.description')}"
+              th:errors="*{ticket.description}">Description error.
+        </span>
+    </p>
     <textarea placeholder="Please describe your problem" th:field="*{ticket.description}"/>
-    <button type="submit">Create</button>
+    <br/>
+    <button type="submit">Create ticket</button>
 </form>
 </body>
 </html>

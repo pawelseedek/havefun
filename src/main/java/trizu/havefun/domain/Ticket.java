@@ -1,6 +1,7 @@
 package trizu.havefun.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.Date;
@@ -14,6 +15,7 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private final long id;
+    @NotBlank(message = "Description cannot be empty.")
     private String description;
     private Date cratedAt;
     private Status status = Status.New;
