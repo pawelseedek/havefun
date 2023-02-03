@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <title>Daily Planner</title>
 </head>
 
 <body>
 <div style="padding: 20px; text-align: center;">
-    <input type="button" onclick="location.href='/ticket';" value="Create Ticket"/>
-    <input type="button" onclick="location.href='/userPanel';" value="UserPanel"/>
-    <input type="button" onclick="location.href='/login';" value="Sign In"/>
-    <input type="button" onclick="location.href='/logout';" value="Sign Out"/>
+    <div sec:authorize="isAuthenticated()">
+        <a class="btn btn-primary" th:href="@{/userPanel}">My tickets</a>
+        <a class="btn btn-success" th:href="@{/ticket}">Create ticket</a>
+        <a class="btn btn-success" th:href="@{/logout}">Logout</a>
+    </div>
 </div>
+
+
 </body>
 </html>

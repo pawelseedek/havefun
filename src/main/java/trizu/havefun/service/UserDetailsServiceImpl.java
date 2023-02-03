@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public User loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if(user != null){
             return user;
@@ -29,5 +29,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public void save(User user){
         userRepository.save(user);
+    }
+
+    public Boolean existsUserByUsername(String username){
+        return userRepository.existsUserByUsername(username);
     }
 }

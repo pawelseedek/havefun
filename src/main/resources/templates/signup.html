@@ -5,16 +5,28 @@
 </head>
 <body>
 <h1>Sign Up:</h1>
-<div th:if="${param.error}">
-    Invalid username and password.
-</div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<form th:action="@{/signup}" th:object="${user}" method="post">
-    <div><label> User Name : <input type="text" th:field="*{username}"/> </label></div>
-    <div><label> Password: <input type="password" th:field="*{password}"/> </label></div>
-    <div><input type="submit" value="Sign Up"/></div>
+<form th:action="@{/signup}" method="post">
+    <div>
+        <p>
+            <span style="color: red;"
+                  th:if="${#fields.hasErrors('user.username')}"
+                  th:errors="*{user.username}">Username error.
+            </span>
+        </p>
+        <label> User Name : <input type="text" th:field="${user.username}"/> </label>
+    </div>
+    <div>
+        <p>
+            <span style="color: red;"
+                  th:if="${#fields.hasErrors('user.password')}"
+                  th:errors="*{user.password}">Password error.
+            </span>
+        </p>
+        <label> Password: <input type="password" th:field="${user.password}"/> </label>
+    </div>
+    <div>
+        <input type="submit" value="Sign Up"/>
+    </div>
 </form>
 </body>
 </html>
