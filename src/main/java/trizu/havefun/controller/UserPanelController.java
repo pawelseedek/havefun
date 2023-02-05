@@ -1,18 +1,13 @@
 package trizu.havefun.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import trizu.havefun.domain.Ticket;
-import trizu.havefun.domain.User;
 import trizu.havefun.repository.TicketRepository;
 import trizu.havefun.repository.UserRepository;
-import trizu.havefun.service.UserDetailsServiceImpl;
 
 import java.security.Principal;
 

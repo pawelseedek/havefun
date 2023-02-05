@@ -16,7 +16,7 @@ import java.util.Date;
 public class Ticket {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final long id;
 
     @NotBlank(message = "Description cannot be empty.")

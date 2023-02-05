@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import trizu.havefun.service.UserDetailsServiceImpl;
+import trizu.havefun.service.UserService;
 
 
 @Configuration
@@ -18,14 +18,15 @@ import trizu.havefun.service.UserDetailsServiceImpl;
 public class WebSecurityConfig {
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private UserService userService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .headers().frameOptions().disable()
                 .and()
-                .authorizeRequests().requestMatchers("/signup").permitAll()
+                .authorizeRequests()
+                .requestMatchers("/signup").permitAll()
                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -41,7 +42,7 @@ public class WebSecurityConfig {
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setUserDetailsService(userService);
         authProvider.setPasswordEncoder(encoder());
         return authProvider;
     }

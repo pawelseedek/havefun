@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import trizu.havefun.domain.Ticket;
-import trizu.havefun.domain.User;
-import trizu.havefun.repository.TicketRepository;
-import trizu.havefun.service.UserDetailsServiceImpl;
+import trizu.havefun.service.TicketService;
+import trizu.havefun.service.impl.UserServiceImpl;
 
 import java.security.Principal;
 
@@ -19,12 +18,12 @@ import java.security.Principal;
 @RequestMapping("/ticket")
 public class TicketController {
 
-    private TicketRepository ticketRepository;
-    private UserDetailsServiceImpl userDetailsService;
+    private TicketService ticketService;
+    private UserServiceImpl userDetailsService;
 
     @Autowired
-    public TicketController(TicketRepository ticketRepository, UserDetailsServiceImpl userDetailsService) {
-        this.ticketRepository = ticketRepository;
+    public TicketController(TicketService ticketService, UserServiceImpl userDetailsService) {
+        this.ticketService = ticketService;
         this.userDetailsService = userDetailsService;
     }
 
@@ -43,10 +42,7 @@ public class TicketController {
         if(errors.hasErrors()){
             return "ticket";
         }
-        User user = userDetailsService.loadUserByUsername(principal.getName());
-        ticket.setCreatedBy(user);
-        ticket.setOwner(user);
-        ticketRepository.save(ticket);
+        ticketService.save(ticket);
         return "redirect:/userPanel";
     }
 }
